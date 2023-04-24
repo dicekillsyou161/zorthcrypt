@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Encryption/Decryption</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        textarea {
+            width: 100%;
+            min-height: 100px;
+        }
+        #result {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>AES 256 Encryption/Decryption</h1>
+    <form id="encryption-form">
+        <label for="action">Choose an action:</label>
+        <select id="action" name="action">
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select>
+        <br>
+        <label for="text">Text:</label>
+        <textarea id="text" name="text" required></textarea>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <pre id="result"></pre>
+    <script>
+        $('#encryption-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/encrypt_decrypt',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    $('#result').text(response.result);
+                },
+                error: function() {
+                    $('#result').text('Error: An error occurred during the request.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
