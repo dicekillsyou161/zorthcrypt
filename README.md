@@ -20,9 +20,8 @@ Install the required dependencies:
 
 
 
-Run the Flask application:
-  export FLASK_APP=zorthcrypt.py
-  flask run
+Run the application:
+  nohup python3 zorthcrypt.py
 
 
 
